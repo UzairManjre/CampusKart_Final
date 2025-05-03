@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - CampusKart</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Common styles -->
+    <link rel="stylesheet" href="assets/css/common.css">
+    <!-- Products page specific styles -->
+    <link rel="stylesheet" href="assets/css/products.css">
+</head>
+<body class="products-page">
+    <!-- Include Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="products-container">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+            <div class="filters-header">
+                <h3>Filters</h3>
+                <button class="clear-filters">Clear All</button>
+            </div>
+
+            <!-- Categories -->
+            <div class="filter-section">
+                <h4>Categories</h4>
+                <div class="filter-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="category" value="electronics">
+                        <span>Electronics</span>
+                        <span class="count">(45)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="category" value="books">
+                        <span>Books</span>
+                        <span class="count">(32)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="category" value="furniture">
+                        <span>Furniture</span>
+                        <span class="count">(28)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="category" value="clothing">
+                        <span>Clothing</span>
+                        <span class="count">(23)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Price Range -->
+            <div class="filter-section">
+                <h4>Price Range</h4>
+                <div class="price-range">
+                    <div class="range-inputs">
+                        <input type="range" id="price-min" min="0" max="10000" value="0">
+                        <input type="range" id="price-max" min="0" max="10000" value="10000">
+                    </div>
+                    <div class="range-values">
+                        <input type="number" id="min-value" value="0">
+                        <span>to</span>
+                        <input type="number" id="max-value" value="10000">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Condition -->
+            <div class="filter-section">
+                <h4>Condition</h4>
+                <div class="filter-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="condition" value="new">
+                        <span>New</span>
+                        <span class="count">(56)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="condition" value="like-new">
+                        <span>Like New</span>
+                        <span class="count">(34)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="condition" value="good">
+                        <span>Good</span>
+                        <span class="count">(28)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="condition" value="fair">
+                        <span>Fair</span>
+                        <span class="count">(12)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Availability -->
+            <div class="filter-section">
+                <h4>Availability</h4>
+                <div class="filter-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="availability" value="in-stock">
+                        <span>In Stock</span>
+                        <span class="count">(89)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="availability" value="pre-order">
+                        <span>Pre-order</span>
+                        <span class="count">(12)</span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Products Content -->
+        <section class="products-content">
+            <!-- Products Header -->
+            <div class="products-header">
+                <div class="products-count">
+                    <h2>All Products</h2>
+                    <span>(128 items)</span>
+                </div>
+                <div class="sort-options">
+                    <select id="sort-select">
+                        <option value="featured">Featured</option>
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid">
+                <!-- Product cards will be dynamically added here -->
+            </div>
+
+            <!-- Load More -->
+            <div class="load-more">
+                <button class="load-more-btn">
+                    Load More Products
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Filter Toggle -->
+    <button class="mobile-filter-toggle">
+        <i class="fas fa-filter"></i>
+        Filters
+    </button>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-newsletter">
+                    <h3>Subscribe to our Newsletter</h3>
+                    <p>Get updates about new products and special offers!</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">About CampusKart</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Student Discount</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <div class="payment-methods">
+                        <img src="assets/images/payment-methods.png" alt="Payment Methods">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    <p>&copy; 2024 CampusKart. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <span>|</span>
+                        <a href="#">Terms of Service</a>
+                        <span>|</span>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Common JavaScript -->
+    <script src="assets/js/common.js"></script>
+    <!-- Products page specific JavaScript -->
+    <script src="assets/js/products.js"></script>
+</body>
+</html>

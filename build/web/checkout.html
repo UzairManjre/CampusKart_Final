@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - CampusKart</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Common styles -->
+    <link rel="stylesheet" href="assets/css/common.css">
+    <!-- Checkout page specific styles -->
+    <link rel="stylesheet" href="assets/css/checkout.css">
+</head>
+<body>
+    <!-- Include Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="checkout-container">
+        <div class="checkout-breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="cart.html">Cart</a>
+            <span class="separator">/</span>
+            <span class="current">Checkout</span>
+        </div>
+
+        <div class="checkout-content">
+            <!-- Checkout Steps -->
+            <div class="checkout-steps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Shipping</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Payment</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Review</div>
+                </div>
+            </div>
+
+            <!-- Checkout Forms -->
+            <div class="checkout-forms">
+                <!-- Shipping Form -->
+                <form id="shipping-form" class="checkout-form active">
+                    <h2>Shipping Information</h2>
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Street Address</label>
+                        <input type="text" id="address" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <select id="state" required>
+                                <option value="">Select State</option>
+                                <!-- Add states here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="zip">ZIP Code</label>
+                            <input type="text" id="zip" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <select id="country" required>
+                                <option value="IN">India</option>
+                                <!-- Add more countries if needed -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="save-address">
+                            Save this address for future use
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="window.location.href='cart.html'">Back to Cart</button>
+                        <button type="button" class="btn-primary" onclick="nextStep(2)">Continue to Payment</button>
+                    </div>
+                </form>
+
+                <!-- Payment Form -->
+                <form id="payment-form" class="checkout-form">
+                    <h2>Payment Information</h2>
+                    <div class="payment-methods">
+                        <div class="payment-method active">
+                            <input type="radio" name="payment" id="credit-card" checked>
+                            <label for="credit-card">
+                                <i class="fas fa-credit-card"></i>
+                                Credit Card
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" name="payment" id="upi">
+                            <label for="upi">
+                                <i class="fas fa-mobile-alt"></i>
+                                UPI
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" name="payment" id="net-banking">
+                            <label for="net-banking">
+                                <i class="fas fa-university"></i>
+                                Net Banking
+                            </label>
+                        </div>
+                    </div>
+                    <div class="credit-card-form">
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date</label>
+                                <input type="text" id="expiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Name on Card</label>
+                            <input type="text" id="card-name">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="prevStep(1)">Back to Shipping</button>
+                        <button type="button" class="btn-primary" onclick="nextStep(3)">Continue to Review</button>
+                    </div>
+                </form>
+
+                <!-- Review Form -->
+                <form id="review-form" class="checkout-form">
+                    <h2>Order Review</h2>
+                    <div class="order-summary">
+                        <h3>Order Items</h3>
+                        <div class="order-items">
+                            <!-- Order items will be dynamically added here -->
+                        </div>
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span>₹499</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span>Free</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax</span>
+                                <span>₹50</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span>₹549</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shipping-details">
+                        <h3>Shipping Address</h3>
+                        <p id="shipping-address-display"></p>
+                    </div>
+                    <div class="payment-details">
+                        <h3>Payment Method</h3>
+                        <p id="payment-method-display"></p>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="prevStep(2)">Back to Payment</button>
+                        <button type="submit" class="btn-primary">Place Order</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Order Summary Sidebar -->
+            <div class="order-summary-sidebar">
+                <h2>Order Summary</h2>
+                <div class="order-items">
+                    <!-- Order items will be dynamically added here -->
+                </div>
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>₹499</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax</span>
+                        <span>₹50</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>₹549</span>
+                    </div>
+                </div>
+                <div class="secure-checkout">
+                    <i class="fas fa-lock"></i>
+                    <span>Secure Checkout</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Common JavaScript -->
+    <script src="assets/js/common.js"></script>
+    <!-- Checkout page specific JavaScript -->
+    <script src="assets/js/checkout.js"></script>
+    <script>
+        // Add error handling for page load
+        window.addEventListener('load', function() {
+            console.log('Checkout page loaded');
+            // Check if header and footer are loaded
+            const header = document.getElementById('header-container');
+            const footer = document.getElementById('footer-container');
+            
+            if (!header || !header.innerHTML) {
+                console.error('Header not loaded properly');
+            }
+            if (!footer || !footer.innerHTML) {
+                console.error('Footer not loaded properly');
+            }
+        });
+
+        // Add error handling for common.js
+        window.addEventListener('error', function(e) {
+            console.error('Error loading script:', e);
+        });
+    </script>
+</body>
+</html> 

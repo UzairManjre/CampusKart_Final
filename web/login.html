@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusKart - Login</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- Left side with illustration -->
+        <div class="illustration-side">
+            <img src="assets/images/signup.jpg" alt="Analytics Illustration" data-gsap="fade-right">
+        </div>
+
+        <!-- Right side with form -->
+        <div class="form-side">
+            <div class="form-wrapper">
+                <h1 class="brand" data-gsap="fade-down">CampusKart</h1>
+                
+                <h2 class="title" data-gsap="fade-up">Sign in</h2>
+                
+                <p class="register-text" data-gsap="fade-up">
+                    If you don't have an account register<br>
+                    You can <a href="signup.html" class="register-link">Register here !</a>
+                </p>
+
+                <form class="login-form" action="Login" method="POST" data-gsap="fade-up">
+                    <div class="input-group" data-gsap="fade-up">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-btn" data-gsap="fade-up">
+                        <span>Login</span>
+                    </button>
+
+                    <div class="divider" data-gsap="fade-up">
+                        <span>or continue with</span>
+                    </div>
+
+                    <div class="social-login" data-gsap="fade-up">
+                        <button type="button" class="social-btn facebook">
+                            <img src="assets/images/facebook.png" alt="Facebook">
+                        </button>
+                        <button type="button" class="social-btn apple">
+                            <img src="assets/images/apple.png" alt="Apple">
+                        </button>
+                        <button type="button" class="social-btn google">
+                            <img src="assets/images/google.png" alt="Google">
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Auth Animations -->
+    <script src="assets/js/auth-animations.js"></script>
+    <script src="assets/js/login.js"></script>
+</body>
+</html>

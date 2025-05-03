@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - CampusKart</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Common styles -->
+    <link rel="stylesheet" href="assets/css/common.css">
+    <!-- Cart page specific styles -->
+    <link rel="stylesheet" href="assets/css/cart.css">
+</head>
+<body>
+    <!-- Include Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="cart-container">
+        <div class="cart-breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="separator">/</span>
+            <span class="current">Shopping Cart</span>
+        </div>
+
+        <div class="cart-content">
+            <!-- Cart Items Section -->
+            <div class="cart-items">
+                <h1>Your Shopping Cart</h1>
+                
+                <!-- Cart Item -->
+                <div class="cart-item">
+                    <div class="item-image">
+                        <img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_UF1000,1000_QL80_.jpg" alt="Product Image">
+                    </div>
+                    <div class="item-details">
+                        <h3>Campus Bottle Pro</h3>
+                        <p class="item-price">₹499</p>
+                        <div class="item-quantity">
+                            <button onclick="updateQuantity(this, -1)">-</button>
+                            <input type="number" value="1" min="1">
+                            <button onclick="updateQuantity(this, 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="remove-item" onclick="removeItem(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="move-to-wishlist" onclick="moveToWishlist(this)">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empty Cart Message (Hidden by default) -->
+                <div class="empty-cart" style="display: none;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h2>Your cart is empty</h2>
+                    <p>Looks like you haven't added any items to your cart yet.</p>
+                    <a href="products.html" class="btn-primary">Continue Shopping</a>
+                </div>
+            </div>
+
+            <!-- Order Summary Section -->
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>₹499</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax</span>
+                        <span>₹50</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>₹549</span>
+                    </div>
+                </div>
+                <div class="coupon-section">
+                    <input type="text" placeholder="Enter coupon code">
+                    <button class="btn-secondary">Apply</button>
+                </div>
+                <button class="btn-primary checkout-btn">Proceed to Checkout</button>
+                <div class="secure-checkout">
+                    <i class="fas fa-lock"></i>
+                    <span>Secure Checkout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recently Viewed Section -->
+        <div class="recently-viewed">
+            <h2>Recently Viewed</h2>
+            <div class="product-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_UF1000,1000_QL80_.jpg" alt="Product">
+                    <h3>Campus Bottle Pro</h3>
+                    <p class="price">₹499</p>
+                    <button class="btn-secondary">Add to Cart</button>
+                </div>
+                <!-- Add more product cards as needed -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Common JavaScript -->
+    <script src="assets/js/common.js"></script>
+    <!-- Cart page specific JavaScript -->
+    <script src="assets/js/cart.js"></script>
+</body>
+</html> 

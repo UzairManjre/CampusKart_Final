@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Description - CampusKart</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Common styles -->
+    <link rel="stylesheet" href="assets/css/common.css">
+    <!-- Description page specific styles -->
+    <link rel="stylesheet" href="assets/css/description.css">
+</head>
+<body>
+    <!-- Include Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="description-container">
+        <div class="product-breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="#category">Category</a>
+            <span class="separator">/</span>
+            <span class="current">Product Name</span>
+        </div>
+
+        <div class="product-details">
+            <!-- Product Images Section -->
+            <div class="product-images">
+                <div class="main-image">
+                    <img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_UF1000,1000_QL80_.jpg" alt="Product Main Image" id="mainImage">
+                </div>
+                <div class="thumbnail-images">
+                    <img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_UF1000,1000_QL80_.jpg" alt="Thumbnail 1" onclick="changeImage(this.src)">
+                    <img src="https://m.media-amazon.com/images/I/61NRYreJ2cL._AC_UF1000,1000_QL80_.jpg" alt="Thumbnail 2" onclick="changeImage(this.src)">
+                    <img src="https://m.media-amazon.com/images/I/71nDX36Y9UL._AC_UF1000,1000_QL80_.jpg" alt="Thumbnail 3" onclick="changeImage(this.src)">
+                </div>
+            </div>
+
+            <!-- Product Info Section -->
+            <div class="product-info">
+                <h1 class="product-title">Campus Bottle Pro</h1>
+                <div class="product-rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <span class="rating-count">(24 Reviews)</span>
+                </div>
+                <div class="product-price">
+                    <span class="current-price">₹499</span>
+                    <span class="original-price">₹999</span>
+                    <span class="discount">50% OFF</span>
+                </div>
+                <div class="product-availability">
+                    <i class="fas fa-check-circle"></i>
+                    <span>In Stock</span>
+                </div>
+                <div class="product-description">
+                    <h2>Description</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="product-features">
+                    <h2>Key Features</h2>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Feature 1</li>
+                        <li><i class="fas fa-check"></i> Feature 2</li>
+                        <li><i class="fas fa-check"></i> Feature 3</li>
+                        <li><i class="fas fa-check"></i> Feature 4</li>
+                    </ul>
+                </div>
+                <div class="product-actions">
+                    <div class="quantity-selector">
+                        <button onclick="updateQuantity(-1)">-</button>
+                        <input type="number" value="1" min="1" id="quantity">
+                        <button onclick="updateQuantity(1)">+</button>
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                    <button class="add-to-wishlist">
+                        <i class="far fa-heart"></i>
+                        Add to Wishlist
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Additional Information -->
+        <div class="product-additional-info">
+            <div class="info-tabs">
+                <button class="tab-button active" onclick="switchTab('details')">Details</button>
+                <button class="tab-button" onclick="switchTab('specifications')">Specifications</button>
+                <button class="tab-button" onclick="switchTab('reviews')">Reviews</button>
+            </div>
+            <div class="tab-content">
+                <div id="details" class="tab-pane active">
+                    <h3>Product Details</h3>
+                    <p>Detailed description of the product goes here. Include materials, dimensions, and other relevant information.</p>
+                </div>
+                <div id="specifications" class="tab-pane">
+                    <h3>Specifications</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <th>Brand</th>
+                            <td>Brand Name</td>
+                        </tr>
+                        <tr>
+                            <th>Model</th>
+                            <td>Model Number</td>
+                        </tr>
+                        <tr>
+                            <th>Color</th>
+                            <td>Available Colors</td>
+                        </tr>
+                        <tr>
+                            <th>Material</th>
+                            <td>Material Type</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="reviews" class="tab-pane">
+                    <h3>Customer Reviews</h3>
+                    <div class="review-summary">
+                        <div class="average-rating">
+                            <h4>4.5</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p>Based on 24 reviews</p>
+                        </div>
+                    </div>
+                    <!-- Sample Review -->
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <h4>John Doe</h4>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                            <span class="review-date">2 days ago</span>
+                        </div>
+                        <p class="review-text">Great product! Exactly what I was looking for. The quality is excellent and it arrived quickly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Common JavaScript -->
+    <script src="assets/js/common.js"></script>
+    <!-- Description page specific JavaScript -->
+    <script src="assets/js/description.js"></script>
+</body>
+</html> 

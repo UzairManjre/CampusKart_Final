@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - CampusKart</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Common styles -->
+    <link rel="stylesheet" href="assets/css/common.css">
+    <!-- FAQ page specific styles -->
+    <link rel="stylesheet" href="assets/css/faq.css">
+</head>
+<body>
+    <!-- Include Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="faq-container">
+        <!-- Hero Section -->
+        <section class="faq-hero">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about CampusKart</p>
+        </section>
+
+        <!-- Breadcrumb -->
+        <div class="faq-breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="separator">/</span>
+            <span class="current">FAQ</span>
+        </div>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="faqSearch" placeholder="Search for questions...">
+                <button type="button" class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- FAQ Categories -->
+        <section class="faq-categories">
+            <div class="category-buttons">
+                <button class="category-btn active" data-category="all">All Questions</button>
+                <button class="category-btn" data-category="account">Account</button>
+                <button class="category-btn" data-category="orders">Orders</button>
+                <button class="category-btn" data-category="shipping">Shipping</button>
+                <button class="category-btn" data-category="payments">Payments</button>
+                <button class="category-btn" data-category="returns">Returns</button>
+            </div>
+        </section>
+
+        <!-- FAQ Content -->
+        <section class="faq-content">
+            <!-- Account Questions -->
+            <div class="faq-category" data-category="account">
+                <h2>Account Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I create an account?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To create an account, click on the "Sign Up" button in the top right corner. Fill in your details including your name, email address, and create a password. You'll receive a verification email to confirm your account.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I reset my password?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Click on "Forgot Password" on the login page. Enter your email address, and we'll send you a link to reset your password. Make sure to check your spam folder if you don't receive the email.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Questions -->
+            <div class="faq-category" data-category="orders">
+                <h2>Order Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I track my order?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can track your order by logging into your account and going to the "My Orders" section. Click on the order you want to track, and you'll see the current status and tracking information.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I modify my order after placing it?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Orders can only be modified within 30 minutes of placement. After that, you'll need to contact our customer support team to make any changes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Questions -->
+            <div class="faq-category" data-category="shipping">
+                <h2>Shipping Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What are your shipping options?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer standard shipping (3-5 business days) and express shipping (1-2 business days). Shipping costs vary based on the size and weight of your order.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you ship internationally?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, we only ship within India. We're working on expanding our shipping options to include international destinations in the future.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Questions -->
+            <div class="faq-category" data-category="payments">
+                <h2>Payment Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What payment methods do you accept?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards, debit cards, UPI, and net banking. We also accept payments through popular digital wallets like Paytm, PhonePe, and Google Pay.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is my payment information secure?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we use industry-standard encryption to protect your payment information. We never store your complete card details on our servers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Return Questions -->
+            <div class="faq-category" data-category="returns">
+                <h2>Return Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is your return policy?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept returns within 7 days of delivery. Items must be unused, in their original packaging, and with all tags attached. Please contact our customer support to initiate a return.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does it take to process a refund?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Refunds are typically processed within 3-5 business days after we receive the returned item. The time it takes for the refund to appear in your account depends on your payment method.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Support -->
+        <section class="support-section">
+            <div class="support-content">
+                <h2>Still Have Questions?</h2>
+                <p>Can't find what you're looking for? Our support team is here to help!</p>
+                <a href="contact.html" class="btn-primary">Contact Support</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Include Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Common JavaScript -->
+    <script src="assets/js/common.js"></script>
+    <!-- FAQ page specific JavaScript -->
+    <script src="assets/js/faq.js"></script>
+</body>
+</html> 
