@@ -101,7 +101,7 @@ public static Cart getActiveCart(int clientId) {
         try {
             conn = DatabaseConnection.initializeDB();
             conn.setAutoCommit(false); // Start transaction
-
+             
             // Get or create cart
             Cart cart = getActiveCartByClientId(clientId);
             if (cart == null) {
@@ -159,8 +159,8 @@ public static Cart getActiveCart(int clientId) {
                 try {
                     conn.setAutoCommit(true);
                     conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
                 }
             }
         }
@@ -251,5 +251,17 @@ public static Cart getActiveCart(int clientId) {
         }
 
         return count;
+    }
+
+    // Method to clear all items from a user's cart
+    public static void clearCart(int clientId) throws SQLException {
+        String query = "DELETE FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE c_id = ? AND status = 'ACTIVE')";
+
+        try (Connection conn = DatabaseConnection.initializeDB();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+             
+            ps.setInt(1, clientId);
+            ps.executeUpdate();
+        }
     }
 }

@@ -164,7 +164,7 @@ function addToCart(productId) {
     
     if (!clientId) {
         alert('Please login to add items to cart');
-        window.location.href = 'login.jsp';
+        window.location.href = 'login.html';
         return;
     }
 

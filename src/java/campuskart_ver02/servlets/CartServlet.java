@@ -19,17 +19,18 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String action = request.getParameter("action");
+         throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+     String action = request.getParameter("action");
         
         try {
-            int clientId = Integer.parseInt(request.getParameter("c_id"));
-            
-            if (clientId <= 0 || action == null) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("Invalid request parameters.");
-                return;
-            }
+     int clientId = Integer.parseInt(request.getParameter("c_id"));
+     
+     if (clientId <= 0 || action == null) {
+         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+         response.getWriter().write("Invalid request parameters.");
+         return;
+     }
 
             switch (action) {
                 case "getCount":
@@ -54,12 +55,15 @@ public class CartServlet extends HttpServlet {
     }
 
     private void handleGetCount(int clientId, HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         int count = CartDAO.getCartItemCount(clientId);
-        response.setContentType("text/plain");
         response.getWriter().write(String.valueOf(count));
     }
 
     private void handleGetCart(int clientId, HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try {
             Cart cart = CartDAO.getActiveCartByClientId(clientId);
             if (cart == null) {
@@ -99,7 +103,8 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/plain");
+        response.setContentType("text/plain; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         
         try {
@@ -112,48 +117,48 @@ public class CartServlet extends HttpServlet {
                 return;
             }
 
-            int productId = Integer.parseInt(request.getParameter("product_id"));
-            switch (action) {
-                case "add":
-                    int quantity = Integer.parseInt(request.getParameter("quantity"));
-                    if (quantity <= 0) {
-                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+         int productId = Integer.parseInt(request.getParameter("product_id"));
+         switch (action) {
+             case "add":
+                 int quantity = Integer.parseInt(request.getParameter("quantity"));
+                 if (quantity <= 0) {
+                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         out.write("Invalid quantity.");
-                        return;
-                    }
-                    CartDAO.addToCart(clientId, productId, quantity);
+                     return;
+                 }
+                 CartDAO.addToCart(clientId, productId, quantity);
                     out.write("Success: Item added to cart");
-                    break;
-                case "remove":
-                    CartDAO.removeFromCart(clientId, productId);
+                 break;
+             case "remove":
+                 CartDAO.removeFromCart(clientId, productId);
                     out.write("Success: Item removed from cart");
-                    break;
-                case "update":
-                    int updatedQty = Integer.parseInt(request.getParameter("quantity"));
-                    if (updatedQty <= 0) {
-                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                 break;
+             case "update":
+                 int updatedQty = Integer.parseInt(request.getParameter("quantity"));
+                 if (updatedQty <= 0) {
+                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                         out.write("Invalid quantity.");
-                        return;
-                    }
-                    CartDAO.updateCartItem(clientId, productId, updatedQty);
+                     return;
+                 }
+                 CartDAO.updateCartItem(clientId, productId, updatedQty);
                     out.write("Success: Cart updated");
-                    break;
-                default:
-                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                 break;
+             default:
+                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     out.write("Invalid action.");
-                    return;
-            }
-            response.setStatus(HttpServletResponse.SC_OK);
-        } catch (NumberFormatException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                 return;
+         }
+         response.setStatus(HttpServletResponse.SC_OK);
+     } catch (NumberFormatException e) {
+         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             out.write("Invalid number format: " + e.getMessage());
         } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             out.write("An error occurred: " + e.getMessage());
             e.printStackTrace();
         } finally {
             out.close();
-        }
-    }
+     }
+}
 }
 

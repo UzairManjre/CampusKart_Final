@@ -147,6 +147,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Search filter
         searchInput.addEventListener('input', filterProducts);
+
+        // Add to Cart logic
+        productsGrid.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-to-cart')) {
+                const productCard = e.target.closest('.product-card');
+                const productId = productCard ? productCard.dataset.productId : null;
+                const userId = window.userId || sessionStorage.getItem('userId');
+                if (userId) {
+                    // Logged-in user: call backend
+                    const formData = new URLSearchParams();
+                    formData.append('action', 'add');
+                    formData.append('c_id', userId);
+                    formData.append('product_id', productId);
+                    formData.append('quantity', '1');
+                    fetch('CartServlet', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(text => {
+                        if (text.toLowerCase().includes('success')) {
+                            alert('Added to cart successfully!');
+                            if (window.updateCartBadge) window.updateCartBadge();
+                        } else {
+                            throw new Error(text);
+                        }
+                    })
+                    .catch(error => alert('Error adding to cart: ' + error.message));
+                } else {
+                    // Guest user: use localStorage
+                    // ... existing localStorage add-to-cart logic ...
+                }
+            }
+        });
     }
 
     function filterProducts() {

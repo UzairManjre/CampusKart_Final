@@ -42,7 +42,7 @@ UserDetails user = (UserDetails) session.getAttribute("user");
                             <span><%= user.getUsername() %></span>
                         </a>
                     <% } else { %>
-                        <a href="login.jsp" class="nav-icon">
+                        <a href="login.html" class="nav-icon">
                             <i class="far fa-user"></i>
                             <span>Login</span>
                         </a>

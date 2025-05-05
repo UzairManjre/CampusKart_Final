@@ -79,29 +79,78 @@ function initPaymentMethods() {
     });
 }
 
-// Function to load order items from cart
+// Function to load order items from backend for logged-in users
 function loadOrderItems() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const userId = window.userId || sessionStorage.getItem('userId');
     const orderItemsContainer = document.querySelector('.order-items');
     const sidebarItemsContainer = document.querySelector('.order-summary-sidebar .order-items');
-    
-    if (cartItems.length === 0) {
-        window.location.href = 'cart.html';
-        return;
+
+    if (userId) {
+        // Fetch cart items from backend
+        fetch(`CartServlet?action=getCart&c_id=${encodeURIComponent(userId)}`)
+            .then(response => response.text())
+            .then(text => {
+                const cartItems = parseCartData(text);
+                if (!cartItems.length) {
+                    window.location.href = 'cart.jsp';
+                    return;
+                }
+                // Clear existing items
+                orderItemsContainer.innerHTML = '';
+                sidebarItemsContainer.innerHTML = '';
+                cartItems.forEach(item => {
+                    const orderItem = createOrderItem(item);
+                    orderItemsContainer.appendChild(orderItem.cloneNode(true));
+                    sidebarItemsContainer.appendChild(orderItem);
+                });
+                updateOrderTotal(cartItems);
+            });
+    } else {
+        // Guest user: fallback to localStorage
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        if (cartItems.length === 0) {
+            window.location.href = 'cart.jsp';
+            return;
+        }
+        orderItemsContainer.innerHTML = '';
+        sidebarItemsContainer.innerHTML = '';
+        cartItems.forEach(item => {
+            const orderItem = createOrderItem(item);
+            orderItemsContainer.appendChild(orderItem.cloneNode(true));
+            sidebarItemsContainer.appendChild(orderItem);
+        });
+        updateOrderTotal(cartItems);
     }
-    
-    // Clear existing items
-    orderItemsContainer.innerHTML = '';
-    sidebarItemsContainer.innerHTML = '';
-    
-    // Add items to both containers
-    cartItems.forEach(item => {
-        const orderItem = createOrderItem(item);
-        orderItemsContainer.appendChild(orderItem.cloneNode(true));
-        sidebarItemsContainer.appendChild(orderItem);
+}
+
+function parseCartData(text) {
+    if (!text.trim()) return [];
+    return text.trim().split('\n').map(line => {
+        const [productId, productName, price, quantity, imagePath] = line.split('|');
+        return {
+            productId: parseInt(productId),
+            name: productName,
+            price: parseFloat(price),
+            quantity: parseInt(quantity),
+            image: imagePath
+        };
     });
-    
-    updateOrderTotal();
+}
+
+function updateOrderTotal(cartItems) {
+    let subtotal = 0;
+    cartItems.forEach(item => {
+        const price = parseFloat(item.price);
+        const quantity = item.quantity || 1;
+        subtotal += price * quantity;
+    });
+    const tax = subtotal * 0.1; // 10% tax
+    const total = subtotal + tax;
+    document.querySelectorAll('.summary-details').forEach(summary => {
+        summary.querySelector('.summary-row:nth-child(1) span:last-child').textContent = `₹${subtotal.toFixed(2)}`;
+        summary.querySelector('.summary-row:nth-child(3) span:last-child').textContent = `₹${tax.toFixed(2)}`;
+        summary.querySelector('.summary-row.total span:last-child').textContent = `₹${total.toFixed(2)}`;
+    });
 }
 
 // Function to create order item element
@@ -116,28 +165,6 @@ function createOrderItem(item) {
         </div>
     `;
     return div;
-}
-
-// Function to update order total
-function updateOrderTotal() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    let subtotal = 0;
-    
-    cartItems.forEach(item => {
-        const price = parseFloat(item.price.replace('₹', ''));
-        const quantity = item.quantity || 1;
-        subtotal += price * quantity;
-    });
-    
-    const tax = subtotal * 0.1; // 10% tax
-    const total = subtotal + tax;
-    
-    // Update all summary sections
-    document.querySelectorAll('.summary-details').forEach(summary => {
-        summary.querySelector('.summary-row:nth-child(1) span:last-child').textContent = `₹${subtotal.toFixed(2)}`;
-        summary.querySelector('.summary-row:nth-child(3) span:last-child').textContent = `₹${tax.toFixed(2)}`;
-        summary.querySelector('.summary-row.total span:last-child').textContent = `₹${total.toFixed(2)}`;
-    });
 }
 
 // Function to initialize form validation

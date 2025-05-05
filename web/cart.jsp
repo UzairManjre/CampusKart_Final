@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +11,13 @@
 </head>
 <body>
     <%@ include file="components/header.jsp" %>
+    <% String emptyParam = request.getParameter("empty"); %>
     <main class="cart-container">
         <div class="cart-header">
             <h1>Your Shopping Cart</h1>
+            <% if ("1".equals(emptyParam)) { %>
+                <div class="cart-warning" style="color: #d9534f; font-weight: bold; margin-top: 10px;">Your cart is empty. Please add items before checking out.</div>
+            <% } %>
         </div>
         <div class="cart-items" id="cartItemsContainer">
             <!-- Cart items will be rendered here by JS -->

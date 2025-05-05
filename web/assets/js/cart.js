@@ -9,20 +9,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadCartData() {
     const userId = window.userId || sessionStorage.getItem('userId');
-    if (!userId) {
-        showEmptyCart('Please login to view your cart.', 'login.jsp', 'Login');
-        return;
+    if (userId) {
+        // Logged-in user: fetch cart from backend
+        fetch(`CartServlet?action=getCart&c_id=${encodeURIComponent(userId)}`)
+            .then(response => response.text())
+            .then(text => {
+                const cartItems = parseCartData(text);
+                renderCart(cartItems);
+            })
+            .catch(() => {
+                showEmptyCart('Error loading cart. Please try again.');
+            });
+    } else {
+        // Guest user: use localStorage
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        renderCart(cartItems);
     }
-
-    fetch(`CartServlet?action=getCart&c_id=${encodeURIComponent(userId)}`)
-        .then(response => response.text())
-        .then(text => {
-            const cartItems = parseCartData(text);
-            renderCart(cartItems);
-        })
-        .catch(() => {
-            showEmptyCart('Error loading cart. Please try again.');
-        });
 }
 
 function parseCartData(text) {
@@ -166,10 +168,11 @@ function checkout() {
     const userId = window.userId || sessionStorage.getItem('userId');
     if (!userId) {
         alert('Please login to proceed with checkout');
-        window.location.href = 'login.jsp';
+        window.location.href = 'login.html';
         return;
     }
-    alert('Checkout functionality coming soon!');
+    // Redirect to checkout page
+    window.location.href = 'checkout.jsp';
 }
 
 // Function to update quantity
@@ -303,7 +306,7 @@ function createCartItem(item) {
 // Function to update cart count in header
 function updateCartCount() {
     const cartItems = document.querySelectorAll('.cart-item');
-    const cartCount = document.querySelector('.nav-icon[href="cart.html"] .badge');
+    const cartCount = document.querySelector('.nav-icon[href="cart.jsp"] .badge');
     
     if (cartCount) {
         cartCount.textContent = cartItems.length;
