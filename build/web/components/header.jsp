@@ -37,21 +37,16 @@ UserDetails user = (UserDetails) session.getAttribute("user");
             <div class="nav-right">
                 <div class="nav-icons">
                     <% if (user != null) { %>
-                        <a href="#" class="nav-icon">
+                        <a href="profile.jsp" class="nav-icon">
                             <i class="far fa-user"></i>
                             <span><%= user.getUsername() %></span>
                         </a>
                     <% } else { %>
-                        <a href="login.html" class="nav-icon">
+                        <a href="login.jsp" class="nav-icon">
                             <i class="far fa-user"></i>
                             <span>Login</span>
                         </a>
                     <% } %>
-                    <a href="#" class="nav-icon" data-type="wishlist">
-                        <i class="far fa-heart"></i>
-                        <span>Wishlist</span>
-                        <span class="badge">0</span>
-                    </a>
                     <a href="cart.jsp" class="nav-icon" data-type="cart">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Cart</span>

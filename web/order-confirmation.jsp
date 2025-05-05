@@ -19,13 +19,14 @@
         <p>Your order has been placed successfully. Here are your order details:</p>
         <h2>Shipping Information</h2>
         <ul style="list-style: none; padding: 0;">
-            <li><strong>Name:</strong> <%= session.getAttribute("orderFullName") %></li>
-            <li><strong>Email:</strong> <%= session.getAttribute("orderEmail") %></li>
-            <li><strong>Phone:</strong> <%= session.getAttribute("orderPhone") %></li>
-            <li><strong>Address:</strong> <%= session.getAttribute("orderAddress") %></li>
+            <li><strong>Name:</strong> <%= session.getAttribute("orderFullName") != null ? session.getAttribute("orderFullName") : "" %></li>
+            <li><strong>Enrollment Number:</strong> <%= session.getAttribute("orderEnrollmentNumber") != null ? session.getAttribute("orderEnrollmentNumber") : "" %></li>
+            <li><strong>Email:</strong> <%= session.getAttribute("orderEmail") != null ? session.getAttribute("orderEmail") : "" %></li>
+            <!-- <li><strong>Phone:</strong> <%= session.getAttribute("orderPhone") != null ? session.getAttribute("orderPhone") : "" %></li> -->
+            <!-- <li><strong>Address:</strong> <%= session.getAttribute("orderAddress") != null ? session.getAttribute("orderAddress") : "" %></li> -->
         </ul>
         <h2>Payment Method</h2>
-        <p><%= session.getAttribute("orderPaymentMethod") %></p>
+        <p><%= session.getAttribute("orderPaymentMethod") != null ? session.getAttribute("orderPaymentMethod") : "" %></p>
         <h2>Order Items</h2>
         <div class="order-items">
             <ul style="list-style: none; padding: 0;">

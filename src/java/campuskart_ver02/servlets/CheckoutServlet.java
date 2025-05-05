@@ -8,6 +8,9 @@ import Database.StudentDAO;
 import Database.TransactionDAO;
 import AbstactClasses.UserDetails;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import Database.DatabaseConnection;
 
 @WebServlet("/CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
@@ -68,6 +72,25 @@ public class CheckoutServlet extends HttpServlet {
             CartDAO.clearCart(clientId);
             // Set order items in session for confirmation page
             session.setAttribute("orderItems", cartItems);
+            // Set user info for order confirmation
+            session.setAttribute("orderFullName", user.getUsername());
+            session.setAttribute("orderEnrollmentNumber", user.getEnrollmentNumber());
+            session.setAttribute("orderEmail", user.getEmail());
+            session.setAttribute("orderPhone", ""); // Not available in DB
+            session.setAttribute("orderAddress", ""); // Not available in DB
+            // Fetch payment method for the latest transaction (if any)
+            String paymentMethod = "Cash"; // Default fallback
+            try (Connection conn = DatabaseConnection.initializeDB();
+                 PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT payment_method FROM Payment ORDER BY pay_id DESC LIMIT 1")) {
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    paymentMethod = rs.getString("payment_method");
+                }
+            } catch (Exception e) {
+                System.err.println("Error fetching payment method: " + e.getMessage());
+            }
+            session.setAttribute("orderPaymentMethod", paymentMethod);
             // Redirect to confirmation page
             response.sendRedirect("order-confirmation.jsp");
         } catch (SQLException e) {

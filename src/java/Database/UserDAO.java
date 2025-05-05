@@ -137,4 +137,65 @@ public class UserDAO {
             return false;
         }
     }
+
+    // Method to update user profile information
+    public static boolean updateUserProfile(int userId, String enrollmentNumber) {
+        String updateStudentQuery = "UPDATE Client SET enrollment_number = ? WHERE username = (SELECT username FROM User WHERE user_id = ?)";
+
+        try (Connection conn = DatabaseConnection.initializeDB()) {
+            conn.setAutoCommit(false);
+            try {
+                // Update Client table if enrollment number is provided
+                if (enrollmentNumber != null && !enrollmentNumber.isEmpty()) {
+                    try (PreparedStatement pstmt = conn.prepareStatement(updateStudentQuery)) {
+                        pstmt.setString(1, enrollmentNumber);
+                        pstmt.setInt(2, userId);
+                        pstmt.executeUpdate();
+                    }
+                }
+
+                conn.commit();
+                return true;
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating user profile: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Method to get user details by ID
+    public static UserDetails getUserById(int userId) {
+        String userQuery = "SELECT u.*, c.enrollment_number FROM User u " +
+                          "LEFT JOIN Client c ON u.username = c.username " +
+                          "WHERE u.user_id = ?";
+
+        try (Connection conn = DatabaseConnection.initializeDB();
+             PreparedStatement pstmt = conn.prepareStatement(userQuery)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String enrollmentNumber = rs.getString("enrollment_number");
+
+                // Create appropriate user object based on enrollment number
+                if (enrollmentNumber != null) {
+                    Student student = new Student(username, enrollmentNumber, email);
+                    student.setUserId(userId);
+                    return student;
+                } else {
+                    // Handle moderator case if needed
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting user details: " + e.getMessage());
+        }
+        return null;
+    }
 }
