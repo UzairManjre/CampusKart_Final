@@ -41,6 +41,10 @@ UserDetails user = (UserDetails) session.getAttribute("user");
                             <i class="far fa-user"></i>
                             <span><%= user.getUsername() %></span>
                         </a>
+                        <a href="sell-product.jsp" class="nav-icon sell-button">
+                            <i class="fas fa-tag"></i>
+                            <span>Sell</span>
+                        </a>
                     <% } else { %>
                         <a href="login.jsp" class="nav-icon">
                             <i class="far fa-user"></i>
