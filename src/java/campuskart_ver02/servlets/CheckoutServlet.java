@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Database.DatabaseConnection;
+import campuskart_ver02.classes.Cart;
 
 @WebServlet("/CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
@@ -39,8 +40,16 @@ public class CheckoutServlet extends HttpServlet {
         }
         int clientId = StudentDAO.getStudentByUsername(user.getUsername()).getClientId();
         try {
-            // Get cart items
-            List<CartItem> cartItems = CartDAO.getCartItems(clientId);
+            // Get cart items using cartId
+            Cart cart = CartDAO.getActiveCartByClientId(clientId);
+            System.out.println("DEBUG: Cart for clientId=" + clientId + " is " + cart);
+            List<CartItem> cartItems = cart != null ? CartDAO.getCartItems(cart.getCartId()) : new java.util.ArrayList<>();
+            System.out.println("DEBUG: Cart items size = " + (cartItems != null ? cartItems.size() : "null"));
+            if (cartItems != null) {
+                for (CartItem item : cartItems) {
+                    System.out.println("DEBUG: CartItem: productId=" + item.getProductId() + ", qty=" + item.getQuantity());
+                }
+            }
             if (cartItems == null || cartItems.isEmpty()) {
                 response.sendRedirect("cart.jsp?empty=1");
                 return;

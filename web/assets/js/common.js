@@ -57,9 +57,7 @@ if (searchInput && searchButton) {
 function performSearch() {
     const query = searchInput.value.trim();
     if (query) {
-        // Implement search functionality
-        console.log('Searching for:', query);
-        // You can add your search implementation here
+        window.location.href = 'products.jsp?search=' + encodeURIComponent(query);
     }
 }
 
@@ -248,5 +246,31 @@ function updateCartBadge() {
     .catch(error => {
         console.error('Error updating cart badge:', error);
     });
+}
+
+// Sync guest cart to backend after login
+function syncGuestCartToBackend() {
+    const guestCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const userId = window.userId || sessionStorage.getItem('userId');
+    if (userId && guestCart.length > 0) {
+        guestCart.forEach(item => {
+            fetch('CartServlet', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    action: 'add',
+                    c_id: userId,
+                    product_id: item.productId,
+                    quantity: item.quantity
+                })
+            });
+        });
+        localStorage.removeItem('cartItems');
+    }
+}
+
+// Call syncGuestCartToBackend after login if userId is set
+if (window.userId || sessionStorage.getItem('userId')) {
+    syncGuestCartToBackend();
 }
 

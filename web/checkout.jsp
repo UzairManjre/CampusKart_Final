@@ -6,6 +6,7 @@
 <%@ page import="Database.ProductDAO" %>
 <%@ page import="Database.StudentDAO" %>
 <%@ page import="AbstactClasses.UserDetails" %>
+<%@ page import="campuskart_ver02.classes.Cart" %>
 
 <%
     UserDetails user = (UserDetails) session.getAttribute("user");
@@ -16,7 +17,8 @@
     } else {
         clientId = Database.StudentDAO.getStudentByUsername(user.getUsername()).getClientId();
     }
-    List<CartItem> cartItems = CartDAO.getCartItems(clientId);
+    Cart cart = CartDAO.getActiveCartByClientId(clientId);
+    List<CartItem> cartItems = cart != null ? CartDAO.getCartItems(cart.getCartId()) : new java.util.ArrayList();
     if (cartItems == null || cartItems.isEmpty()) {
         response.sendRedirect("cart.jsp?empty=1");
         return;

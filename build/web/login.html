@@ -6,6 +6,25 @@
     <title>CampusKart - Login</title>
     <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .register-link {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .register-link:hover {
+            color: #4338ca;
+        }
+
+        .register-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -22,8 +41,10 @@
                 <h2 class="title" data-gsap="fade-up">Sign in</h2>
                 
                 <p class="register-text" data-gsap="fade-up">
-                    If you don't have an account register<br>
-                    You can <a href="signup.html" class="register-link">Register here !</a>
+                    Don't have an account? 
+                    <a href="registration.jsp" class="register-link">
+                        <i class="fas fa-user-plus"></i>Register here
+                    </a>
                 </p>
 
                 <form class="login-form" action="Login" method="POST" data-gsap="fade-up">
@@ -40,19 +61,10 @@
                     </button>
 
                     <div class="divider" data-gsap="fade-up">
-                        <span>or continue with</span>
                     </div>
 
                     <div class="social-login" data-gsap="fade-up">
-                        <button type="button" class="social-btn facebook">
-                            <img src="assets/images/facebook.png" alt="Facebook">
-                        </button>
-                        <button type="button" class="social-btn apple">
-                            <img src="assets/images/apple.png" alt="Apple">
-                        </button>
-                        <button type="button" class="social-btn google">
-                            <img src="assets/images/google.png" alt="Google">
-                        </button>
+                     
                     </div>
                 </form>
             </div>

@@ -69,7 +69,8 @@
         <h1 class="hero-title" data-gsap="fade-up">Welcome to Campus Kart</h1>
         <p class="hero-subtitle" data-gsap="fade-up">Your Campus Marketplace</p>
         <% } %>
-        <button class="cta" data-gsap="fade-up" data-scroll-to="products">Explore Now</button>
+     <button class="cta" data-gsap="fade-up" data-scroll-to="products" onclick="window.location.href='products.jsp'">Explore Now</button>
+
       </div>
     </section>
 

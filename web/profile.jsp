@@ -2,9 +2,13 @@
 <%@ page import="AbstactClasses.UserDetails" %>
 <%@ page import="Database.UserDAO" %>
 <%@ page import="Database.TransactionDAO" %>
-<%@ page import="java.util.List" %>
+<%@ page import="Database.ProductDAO" %>
 <%@ page import="campuskart_ver02.classes.Transaction" %>
+<%@ page import="campuskart_ver02.classes.Product" %>
 <%@ include file="components/header.jsp" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Database.StudentDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -261,7 +265,7 @@
 <body>
 <%
 if (user == null) {
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("login.html");
     return;
 }
 
@@ -280,6 +284,16 @@ if ("POST".equals(request.getMethod()) && "update_profile".equals(request.getPar
     }
     return;
 }
+
+campuskart_ver02.classes.Student studentUser = null;
+if (user != null) {
+    studentUser = Database.StudentDAO.getStudentByUsername(user.getUsername());
+}
+List myProducts = new java.util.ArrayList();
+if (studentUser != null) {
+    myProducts = ProductDAO.getProductsBySeller(studentUser.getClientId());
+}
+int myProductsCount = myProducts != null ? myProducts.size() : 0;
 %>
     <div class="profile-container">
         <div class="profile-header">
@@ -304,6 +318,7 @@ if ("POST".equals(request.getMethod()) && "update_profile".equals(request.getPar
                 <ul class="profile-menu">
                     <li><a href="#" class="active" data-tab="dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
                     <li><a href="#" data-tab="orders"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+                    <li><a href="#" data-tab="myproducts"><i class="fas fa-box"></i> My Products</a></li>
                     <li><a href="#" data-tab="settings"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </div>
@@ -352,6 +367,56 @@ if ("POST".equals(request.getMethod()) && "update_profile".equals(request.getPar
                     <% } %>
                 </div>
 
+                <div id="myproducts" class="tab-content">
+                    <% if ("removed".equals(request.getParameter("success"))) { %>
+                        <div style="background:#d4edda;color:#155724;border:1px solid #c3e6cb;padding:1rem;border-radius:8px;margin-bottom:1rem;">Product removed successfully!</div>
+                    <% } %>
+                    <% if ("remove".equals(request.getParameter("error"))) { %>
+                        <div style="background:#f8d7da;color:#721c24;border:1px solid #f5c6cb;padding:1rem;border-radius:8px;margin-bottom:1rem;">Error removing product. Please try again.</div>
+                    <% } %>
+                    <% out.println("studentUser: " + studentUser); %>
+                    <% out.println("clientId: " + (studentUser != null ? studentUser.getClientId() : "null")); %>
+                    <% out.println("myProductsCount: " + myProductsCount); %>
+                    <h3>My Products (<%= myProductsCount %>)</h3>
+                    <% if (myProductsCount > 0) { %>
+                        <div class="orders-list">
+                            <% for (int i = 0; i < myProducts.size(); i++) {
+                                Product product = (Product) myProducts.get(i);
+                                String imagePath = product.getImagePath();
+                                if (imagePath == null || imagePath.trim().length() == 0) {
+                                    imagePath = "assets/images/default-product.jpg";
+                                } else if (!imagePath.startsWith("uploaded_images/") && !imagePath.startsWith("http")) {
+                                    imagePath = "uploaded_images/" + imagePath;
+                                }
+                            %>
+                            <div class="order-item">
+                                <div class="order-header">
+                                    <span class="order-id">Product #<%= product.getProductId() %></span>
+                                    <span class="order-date"><%= product.getTimestamp() %></span>
+                                </div>
+                                <div class="order-details">
+                                    <div class="product-info">
+                                        <h4><%= product.getProductName() %></h4>
+                                        <p>Price: &#8377;<%= String.format("%.2f", product.getPrice()) %></p>
+                                        <p>Category: <%= product.getCategory() %></p>
+                                        <p>Status: <%= product.getQuantity() > 0 ? "Available" : "Sold" %></p>
+                                    </div>
+                                    <div class="seller-info">
+                                        <img src="<%= imagePath %>" alt="Product Image" style="width:80px;height:80px;border-radius:8px;">
+                                        <form action="RemoveProductServlet" method="POST" style="margin-top:10px;">
+                                            <input type="hidden" name="productId" value="<%= product.getProductId() %>" />
+                                            <button type="submit" class="btn btn-danger" style="background:#dc3545;color:#fff;border:none;padding:6px 16px;border-radius:5px;cursor:pointer;">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                    <% } else { %>
+                        <p>You have not listed any products yet.</p>
+                    <% } %>
+                </div>
+
                 <div id="settings" class="tab-content">
                     <h3>Account Settings</h3>
                     <form action="profile.jsp" method="POST">
@@ -371,7 +436,7 @@ if ("POST".equals(request.getMethod()) && "update_profile".equals(request.getPar
         </div>
     </div>
 
-    <jsp:include page="components/footer.html" />
+    <%--<jsp:include page="components/footer.html" />--%>
 
     <script>
         // Tab switching functionality

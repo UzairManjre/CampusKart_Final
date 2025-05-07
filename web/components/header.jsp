@@ -10,11 +10,6 @@ UserDetails user = (UserDetails) session.getAttribute("user");
                 <a href="tel:+1234567890"><i class="fas fa-phone"></i> +1 (234) 567-890</a>
                 <a href="mailto:support@campuskart.com"><i class="fas fa-envelope"></i> support@campuskart.com</a>
             </div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
         </div>
 
         <!-- Main Navigation -->
@@ -46,7 +41,7 @@ UserDetails user = (UserDetails) session.getAttribute("user");
                             <span>Sell</span>
                         </a>
                     <% } else { %>
-                        <a href="login.jsp" class="nav-icon">
+                        <a href="login.html" class="nav-icon">
                             <i class="far fa-user"></i>
                             <span>Login</span>
                         </a>
@@ -67,13 +62,13 @@ UserDetails user = (UserDetails) session.getAttribute("user");
                 <span>Menu</span>
             </button>
             <ul>
-                <li><a href="#" onclick="goToCategory('Electronics'); return false;">Electronics</a></li>
-                <li><a href="#" onclick="goToCategory('Books'); return false;">Books</a></li>
-                <li><a href="#" onclick="goToCategory('Stationery'); return false;">Stationery</a></li>
-                <li><a href="#" onclick="goToCategory('Clothing'); return false;">Clothing</a></li>
-                <li><a href="#" onclick="goToCategory('Sports'); return false;">Sports</a></li>
-                <li><a href="#" onclick="goToCategory('Accessories'); return false;">Accessories</a></li>
-                <li><a href="#" onclick="goToCategory(''); return false;">More</a></li>
+                <li><a href="#" onclick="goToCategory('Electronics'); event.preventDefault();">Electronics</a></li>
+                <li><a href="#" onclick="goToCategory('Books'); event.preventDefault();">Books</a></li>
+                <li><a href="#" onclick="goToCategory('Stationery'); event.preventDefault();">Stationery</a></li>
+                <li><a href="#" onclick="goToCategory('Clothing'); event.preventDefault();">Clothing</a></li>
+                <li><a href="#" onclick="goToCategory('Sports'); event.preventDefault();">Sports</a></li>
+                <li><a href="#" onclick="goToCategory('Accessories'); event.preventDefault();">Accessories</a></li>
+                <li><a href="#" onclick="goToCategory(''); event.preventDefault();">More</a></li>
             </ul>
         </div>
     </div>

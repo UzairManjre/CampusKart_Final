@@ -26,8 +26,8 @@ public class AddProductServlet extends HttpServlet {
         Student currentUser = (Student) session.getAttribute("user");
         System.out.println("[DEBUG] Current user (from session): " + currentUser);
         if (currentUser == null) {
-            System.out.println("[DEBUG] No user in session. Redirecting to login.jsp");
-            response.sendRedirect("login.jsp");
+            System.out.println("[DEBUG] No user in session. Redirecting to login.html");
+            response.sendRedirect("login.html");
             return;
         }
         // Always get the latest Student object from DB

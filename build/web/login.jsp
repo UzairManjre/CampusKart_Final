@@ -9,7 +9,27 @@
     <title>Login - Campus Kart</title>
     <link rel="stylesheet" href="assets/css/common.css">
     <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .register-link:hover {
+            color: #4338ca;
+        }
+
+        .register-link i {
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -22,6 +42,9 @@
                 </div>
                 <button type="submit" class="login-btn">Login</button>
             </form>
+            <a href="registration.jsp" class="register-link">
+                <i class="fas fa-user-plus"></i>Don't have an account? Register here
+            </a>
         </div>
     </div>
 

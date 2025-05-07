@@ -107,7 +107,7 @@ function updateQuantity(productId, newQuantity) {
     const userId = window.userId || sessionStorage.getItem('userId');
     if (!userId) {
         alert('Please login to update cart items');
-        window.location.href = 'login.jsp';
+        window.location.href = 'login.html';
         return;
     }
     if (newQuantity < 1) return;
@@ -138,7 +138,7 @@ function removeFromCart(productId) {
     const userId = window.userId || sessionStorage.getItem('userId');
     if (!userId) {
         alert('Please login to remove items from cart');
-        window.location.href = 'login.jsp';
+        window.location.href = 'login.html';
         return;
     }
     if (!confirm('Are you sure you want to remove this item from your cart?')) return;

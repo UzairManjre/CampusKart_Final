@@ -20,6 +20,7 @@
     String maxPriceStr = request.getParameter("maxPrice");
     String availability = request.getParameter("availability");
     String sortBy = request.getParameter("sortBy");
+    String searchQuery = request.getParameter("search");
     
     // Get all products
     List<Product> products;
@@ -27,6 +28,18 @@
         products = ProductDAO.getProductsByCategory(selectedCategory);
     } else {
         products = ProductDAO.getAllProducts();
+    }
+    
+    // Filter by search query
+    if (searchQuery != null && !searchQuery.trim().isEmpty() && products != null) {
+        String q = searchQuery.trim().toLowerCase();
+        for (int i = products.size() - 1; i >= 0; i--) {
+            Product p = products.get(i);
+            if (!(p.getProductName().toLowerCase().contains(q) ||
+                  p.getDescription().toLowerCase().contains(q))) {
+                products.remove(i);
+            }
+        }
     }
     
     // Apply filters

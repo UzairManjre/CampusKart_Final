@@ -2,7 +2,7 @@
 <%@ include file="components/header.jsp" %>
 <%
 if (user == null) {
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("login.html");
     return;
 }
 %>
@@ -22,6 +22,7 @@ if (user == null) {
     
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="assets/js/common.js"></script>
     
     <style>
         /* Base Styles */

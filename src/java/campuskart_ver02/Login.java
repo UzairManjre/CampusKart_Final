@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
             
             if (username == null || username.trim().isEmpty()) {
                 System.out.println("Empty username provided");
-                response.sendRedirect("login.jsp?error=2");
+                response.sendRedirect("login.html?error=2");
                 return;
             }
 
@@ -49,32 +49,56 @@ public class Login extends HttpServlet {
                 System.out.println("User found! Username: " + user.getUsername() + 
                                  ", Role: " + user.getRole() + 
                                  ", Email: " + user.getEmail());
-                // Create session and redirect to index.jsp
+                
+                // Create session
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                // Ensure user has an active cart
-                int clientId = StudentDAO.getStudentByUsername(user.getUsername()).getClientId();
-                Cart cart = Database.CartDAO.getActiveCart(clientId);
-                if (cart == null) {
-                    cart = Database.CartDAO.createNewCart(clientId);
+                
+                // Handle role-based redirection
+                String role = user.getRole();
+                if (role != null) {
+                    if (role.equalsIgnoreCase("Student")) {
+                        try {
+                            // Only for students: ensure user has an active cart
+                            int clientId = StudentDAO.getStudentByUsername(user.getUsername()).getClientId();
+                            Cart cart = CartDAO.getActiveCart(clientId);
+                            if (cart == null) {
+                                cart = CartDAO.createNewCart(clientId);
+                            }
+                            session.setAttribute("cart", cart);
+                            System.out.println("Session created, redirecting to index.jsp...");
+                            response.sendRedirect("index.jsp");
+                        } catch (Exception e) {
+                            logger.log(Level.SEVERE, "Error setting up student cart: ", e);
+                            response.sendRedirect("login.html?error=cart");
+                        }
+                    } else if (role.equalsIgnoreCase("Moderator")) {
+                        // For moderators: no cart logic needed
+                        System.out.println("Session created, redirecting to moddash.jsp...");
+                        response.sendRedirect("moddash.jsp");
+                    } else {
+                        // Unknown role
+                        System.out.println("Unknown role: " + role);
+                        response.sendRedirect("login.html?error=role");
+                    }
+                } else {
+                    System.out.println("User role is null");
+                    response.sendRedirect("login.html?error=role");
                 }
-                session.setAttribute("cart", cart);
-                System.out.println("Session created, redirecting to index.jsp...");
-                response.sendRedirect("index.jsp");
             } else {
                 System.out.println("User not found in database");
-                response.sendRedirect("login.jsp?error=1");
+                response.sendRedirect("login.html?error=1");
             }
         } catch (Exception e) {
             System.out.println("Error during login process: " + e.getMessage());
             logger.log(Level.SEVERE, "Error during login process: ", e);
-            response.sendRedirect("login.jsp?error=3");
+            response.sendRedirect("login.html?error=3");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("login.html");
     }
 }

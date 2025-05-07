@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/src/java/Database/DatabaseConnection.java</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/web/index.jsp</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/web/index.html</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/src/java/Database/DatabaseSetup.java</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/src/java/campuskart_ver02/servlets/TestServlet.java</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/web/logout.jsp</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/web/products.jsp</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/nbproject/build-impl.xml</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/web/login.html</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/src/java/campuskart_ver02/Login.java</file>
-            <file>file:/C:/clg/NUV/sem04/java/CampusKart_Final/src/java/campuskart_ver02/servlets/CartServlet.java</file>
+            <file>file:/C:/CLG/NUV/sem4/JAVA%20CORE/LAB/CampusKart_Final/src/java/servlets/AddProductServlet.java</file>
+            <file>file:/C:/CLG/NUV/sem4/JAVA%20CORE/LAB/CampusKart_Final/web/profile.jsp</file>
+            <file>file:/C:/CLG/NUV/sem4/JAVA%20CORE/LAB/CampusKart_Final/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>
